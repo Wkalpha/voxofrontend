@@ -3,25 +3,12 @@
     <div class="container">
       <div class="row g-4">
         <div class="col-lg-8">
-          <h3 class="mb-3">Billing address</h3>
+          <h3 class="mb-3">寄送資訊</h3>
           <form class="needs-validation">
             <PageCheckoutTopForm ref="checkoutForm" @formSubmitted="order" />
-            <div class="form-check ps-0 mt-3 custome-form-check">
-              <input class="checkbox_animated check-it" type="checkbox" id="flexCheckDefault11" value="saveInfo"
-                v-model="saveUserInfo" />
-              <label class="form-check-label checkout-label" for="flexCheckDefault11">{{
-                useRuntimeConfig().public.const.SaveInfo
-              }}</label>
-            </div>
-
             <hr class="my-lg-5 my-4" />
-
-            <h3 class="mb-3">{{ useRuntimeConfig().public.const.Payment }}</h3>
-
-            <PageCheckoutPaymentForm @changePaymentMethod="changePaymentMethod" />
-            <button v-if="paymentMethod === 'stripe'" class="btn btn-solid-default mt-4" type="button"
-              @click.prevent="handleSubmitClick">
-              {{ useRuntimeConfig().public.const.Continuecheckout }}
+            <button class="btn btn-solid-default mt-4" type="button" @click.prevent="handleSubmitClick">
+              結帳
             </button>
           </form>
         </div>
@@ -35,6 +22,8 @@
 <script setup>
 import { storeToRefs } from "pinia";
 import { useCartStore } from "~~/store/cart";
+import Swal from "sweetalert2";
+import axios from 'axios';
 
 let props = defineProps({
   cartItems: Array
@@ -59,37 +48,60 @@ function order(info) {
     useCartStore().saveUserInfo(userInfo.value)
   }
   if (isLogin.value) {
-    payWithStripe();
+    // payWithStripe();
+    payWithTransfer();
   } else {
     useRouter().push("/page/login");
   }
 
 }
 
-function payWithStripe() {
-  const handler = window.StripeCheckout.configure({
-    key: "PUBLISHBLE_KEY", // 'PUBLISHBLE_KEY'
-    locale: "auto",
-    closed: function () {
-      handler.close();
-      useRouter().push("/order_success");
-    },
-    token: (token) => {
-      useCartStore().createOrder({
-        product: cart.value,
-        userDetail: user.value,
-        token: token.id,
-        amt: cartTotal.value,
-      })
-      useRouter().push("/page/order_success");
-    },
-  });
-  handler.open({
-    name: "VOXO ",
-    description: "Reach to your Dream",
-    amount: cartTotal.value * 100,
-  });
+function payWithTransfer() {
+  console.log(props.cartItems); // 輸出 cartItems
+  let transferAccount = '1234567890'; // 轉帳帳號
+  Swal.fire({
+    title: '銀行轉帳資訊',
+    html: `
+      <p>轉帳金額: ${cartTotal.value}元</p>
+      <p>轉帳帳號: ${transferAccount}</p>
+      <p>確認後將成立訂單</p>
+    `,
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonText: '確認',
+    cancelButtonText: '取消',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // 準備要發送的訂單資料
+      const orderData = {
+        UserId: "testJimmy",
+        ShippingCartId: 1,
+        ShippingDate: null, // 如果有具體發貨日期，這裡可以修改
+        ShippingAddress: null, // 如果有具體地址，這裡可以修改
+        Email: "Jimmy@gmail.com",
+        BillingAddress: null, // 如果有具體地址，這裡可以修改
+        OrderStatus: '已建立',
+        PaymentMethod: 'transfer',
+        TotalAmount: cartTotal.value,
+        ShippingCost: null, // 如果有具體運費，這裡可以修改
+        DiscountAmount: null, // 如果有具體折扣金額，這裡可以修改
+        OrderNotes: `轉帳帳號:${transferAccount}`, // 如果有具體訂單備註，這裡可以修改
+      };
 
+      // 將相關資訊送至後端
+      axios.post('https://localhost:7279/api/Payment/createOrder', orderData)
+        .then(response => {
+          // 導轉至訂單成功頁面
+          useRouter().push("/page/order_success");
+        })
+        .catch(error => {
+          console.error('Error creating order:', error);
+          // 處理錯誤，例如顯示錯誤信息
+          Swal.fire('錯誤', '建立訂單失敗，請稍後再試', 'error');
+        });
+      useRouter().push('/page/order_success');
+    }
+  });
 }
 
 function isFormValid(value) {

@@ -1,5 +1,5 @@
 <template>
-  <div class="modal fade cart-modal " id="addtocart" v-if="product.length !== 0">
+  <div class="modal fade cart-modal " id="addtocart" v-if="product">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">

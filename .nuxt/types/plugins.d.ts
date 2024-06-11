@@ -21,6 +21,7 @@ type NuxtAppInjections =
   InjectionType<typeof import("../../node_modules/nuxt/dist/app/plugins/dev-server-logs").default> &
   InjectionType<typeof import("../../node_modules/nuxt/dist/app/plugins/check-if-layout-used").default> &
   InjectionType<typeof import("../../plugins/plugins").default> &
+  InjectionType<typeof import("../../plugins/liff").default> &
   InjectionType<typeof import("../../plugins/i18n").default> &
   InjectionType<typeof import("../../plugins/ssrPlugins").default> &
   InjectionType<typeof import("../../plugins/useBootstrap.client").default> &

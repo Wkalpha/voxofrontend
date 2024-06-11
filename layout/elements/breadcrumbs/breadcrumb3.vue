@@ -18,10 +18,10 @@
 
             <div class="success-contain">
               <h4>{{ useRuntimeConfig().public.const.OrderSuccess }}</h4>
-              <h5 class="font-light">
+              <!-- <h5 class="font-light">
                 {{ useRuntimeConfig().public.const.PaymentDescription }}
-              </h5>
-              <h6 class="font-light">{{ useRuntimeConfig().public.const.TransactionID }}</h6>
+              </h5> -->
+              <!-- <h6 class="font-light">{{ useRuntimeConfig().public.const.TransactionID }}</h6> -->
             </div>
           </div>
         </div>

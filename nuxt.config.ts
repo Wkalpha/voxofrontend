@@ -78,7 +78,9 @@ export default defineNuxtConfig({
     ],
   ],
   plugins: [
-    { src: "~/plugins/plugins.js", mode: "client" } ],
+    { src: "~/plugins/plugins.js", mode: "client" },
+    { src: "~/plugins/liff.js", mode: "client" }
+  ],
   runtimeConfig: {
     public: {
       const: constants,

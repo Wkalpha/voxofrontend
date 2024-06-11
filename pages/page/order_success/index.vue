@@ -6,7 +6,7 @@
     <template v-slot:breadcrumb>
       <breadcrumb3 />
     </template>
-    <PageOrderSuccessDetails />
+    <!-- <PageOrderSuccessDetails /> -->
   </layout5>
 </template>
 

@@ -16,7 +16,7 @@
           <span>{{ selectedCurrencySymbol }}{{ item.price * item.quantity }}</span>
         </li>
         <li class="list-group-item d-flex lh-condensed justify-content-between">
-          <span class="fw-bold">{{ useRuntimeConfig().public.const.TotalUSD }}</span>
+          <span class="fw-bold">新台幣</span>
           <strong>$ {{ cartTotal }}</strong>
         </li>
       </ul>
@@ -26,7 +26,7 @@
         </li>
       </ul>
 
-      <form class="card border-0">
+      <!-- <form class="card border-0">
         <div class="input-group custome-imput-group">
           <input type="text" class="form-control" placeholder="Promo code" />
           <div class="input-group-append">
@@ -35,7 +35,7 @@
             </button>
           </div>
         </div>
-      </form>
+      </form> -->
     </div>
   </div>
 </template>

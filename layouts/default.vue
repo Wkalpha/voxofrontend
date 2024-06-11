@@ -11,7 +11,7 @@
       <div class="bg-overlay show" v-if="overlay" @click.prevent="closeOverlay"></div>
     </Teleport>
     <cartSuccessful :showModal="cartModal" />
-    <quickView :showModal="quickViewModal" />
+    <!-- <quickView :showModal="quickViewModal" /> -->
     <addedSuccessfulModal />
     <copySettingsModal :showModal="copySettingsView" />
     <threeSixtyModal />
@@ -20,7 +20,7 @@
 </template>
 <script>
 import { mapState } from "pinia";
-import quickView from "~/layout/elements/modals/quickViewModal.vue";
+// import quickView from "~/layout/elements/modals/quickViewModal.vue";
 import threeSixtyModal from "~/layout/elements/modals/threeSixtyModal.vue";
 import cartSuccessful from "~/layout/elements/modals/cartSuccessful.vue";
 import themeSettings from "~/layout/elements/themeSettings.vue";
@@ -38,7 +38,7 @@ export default {
   components:
   {
     themeSettings,
-    quickView,
+    // quickView,
     cartSuccessful,
     addedSuccessfulModal,
     copySettingsModal,
@@ -63,7 +63,7 @@ export default {
     }),
     ...mapState(useClickStore, {
       cartModal: 'cartModal',
-      quickViewModal: 'quickViewModal',
+      // quickViewModal: 'quickViewModal',
       overlay: 'overlay',
       copySettingsView: 'copySettings',
     }),

@@ -7,8 +7,7 @@
         <h2>{{ currentProduct.name }}</h2>
       </div>
 
-      <selectSize :product="currentProduct" :submited="submited" @changeQuantityTo="changeQuantityTo"
-        @setSelectedSize="setSelectedSize" />
+      <selectSize :product="currentProduct" :submited="submited" @changeQuantityTo="changeQuantityTo"/>
 
       <div class="product-buttons">
         <a href="javascript:void(0)" @click="addToCart(currentProduct)" id="cartEffect"
@@ -74,36 +73,24 @@ export default {
     },
   },
   methods: {
-    addToCart(product) {
+    async addToCart(product) {
       this.submited = true;
-      if (product.sizeoption) {
-        if (this.selectedSize != "") {
-          product["selectedSize"] = this.selectedSize;
-          this.validEntries = true;
-        } else {
-          this.validEntries = false;
-        }
-      } else {
-        this.validEntries = true;
-      }
-      if (this.validEntries) {
-        var item = { product: product, quantity: this.quantity };
+      var item = { product: product, quantity: this.quantity };
 
-        useCartStore().addToCart(item)
-        useClickStore().changeProductId(product.id)
-        
-        useClickStore().toggleSuccessfulModal({
-          image: product.images[0].src,
-          message: "Item Added to cart",
-          link: useRuntimeConfig().public.const.cartPagePath,
-        })
-      }
+      await useCartStore().fetchAllProducts();
+      // await useClickStore().fetchProducts();
+
+      useCartStore().addToCart(item)
+      useClickStore().changeProductId(product.id)
+      
+      useClickStore().toggleSuccessfulModal({
+        image: product.images[0].src,
+        message: "已加入購物車",
+        link: useRuntimeConfig().public.const.cartPagePath,
+      })
     },
     changeQuantityTo(quantity) {
       this.quantity = quantity;
-    },
-    setSelectedSize(size) {
-      this.selectedSize = size;
     },
   },
   created() {

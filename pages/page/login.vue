@@ -38,28 +38,15 @@
         </p>
 
         <div class="row gx-md-3 gy-3">
-          <div class="col-md-6">
-            <a href="www.facebook.com">
+          <div class="col-md-12">
+            <a href="javascript:void(0)" @click.prevent="loginWithLine">
               <div class="social-media fb-media">
-                <img src="/images/inner-page/facebook.png" class="img-fluid" alt="" />
-                <h6>Facebook</h6>
-              </div>
-            </a>
-          </div>
-          <div class="col-md-6">
-            <a href="www.gmail.com">
-              <div class="social-media google-media">
-                <img src="/images/inner-page/google.png" class="img-fluid" alt="" />
-                <h6>Google</h6>
+                <img src="/images/inner-page/linelogo.png" class="img-fluid" alt="" />
+                <h6>Line</h6>
               </div>
             </a>
           </div>
         </div>
-
-        <p>
-          Not a member?
-          <nuxt-link to="/page/register" class="theme-color">Sign up now</nuxt-link>
-        </p>
       </div>
     </div>
   </div>
@@ -67,6 +54,8 @@
 
 <script>
 import {useUserDashboardStore} from "@/store/userDashboard"
+import { useNuxtApp } from "#app";
+
 export default {
   data() {
     return {
@@ -90,6 +79,25 @@ export default {
       {
         useUserDashboardStore().setUser({email:this.auth.email,isLoggedIn:true})
         this.$router.back()
+      }
+    },
+    async loginWithLine() {
+      try {
+        const { $liffInit, $liff } = useNuxtApp();
+        await $liffInit();
+        console.log("liff", $liff); // 確保這裡打印的不是 undefined
+        if (!$liff.isLoggedIn()) {
+          $liff.login();
+        } else {
+          const profile = await $liff.getProfile();
+          console.log("profile", profile);
+          if (profile) {
+            useUserDashboardStore().setUser({ email: profile.email, isLoggedIn: true });
+            this.$router.back();
+          }
+        }
+      } catch (error) {
+        console.error('Login with LINE failed', error);
       }
     },
     handleFocusOut(field) {

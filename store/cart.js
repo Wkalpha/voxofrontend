@@ -1,14 +1,12 @@
-import axiosData from "../static/data/cart.json";
-import axiosAllProucts from "../static/data/products.json";
-import { useClickStore } from "./clickEvents";
 import { useLayout } from "./layout";
+import axios from "axios";
 
 export const useCartStore = defineStore({
   id: "cart",
   state: () => {
     return {
-      allProducts: axiosAllProucts.data,
-      data: axiosData,
+      allProducts: [],
+      data: [],
       cartItems: [],
       order: [],
       lastAddedProduct1: 0,
@@ -49,6 +47,14 @@ export const useCartStore = defineStore({
     },
   },
   actions: {
+    async fetchAllProducts() {
+      try {
+        const response = await axios.get('https://localhost:7279/api/Product/getAll');
+        this.allProducts = response.data;
+      } catch (error) {
+        console.error("Failed to fetch products", error);
+      }
+    },
     addToCart(payload) {
       var itemToAdd = {};
       var productIndex = indexFound(this.cartItems, payload);

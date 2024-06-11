@@ -267,7 +267,7 @@ const _inlineRuntimeConfig = {
       "EmailRequired": "Your email address will not be published. Required fields are marked *",
       "Contactus": "Contact Us",
       "Howhelp": "How can we help you?",
-      "OrderSuccess": "Order Success",
+      "OrderSuccess": "訂單已成立",
       "PaymentDescription": "Payment Is Successfully Processsed And Your Order Is On The Way",
       "TransactionID": "Transaction ID:267676GHERT105467",
       "OrderDetail": "Order Details",
