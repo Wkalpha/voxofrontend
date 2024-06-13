@@ -399,7 +399,9 @@ const _inlineRuntimeConfig = {
       "aboutUsDesc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam,\n    culpa! Asperiores labore amet nemo ullam odit atque adipisci,\n    hic, aliquid animi fugiat praesentium quidem. Perspiciatis,\n    expedita!",
       "aboutUsDesc2": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam,\n    culpa! Asperiores labore amet nemo ullam odit atque adipisci,\n    hic, aliquid animi fugiat praesentium quidem. Perspiciatis,\n    expedita!",
       "meetOurTeam": "Meet Our Team",
-      "teamDesc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero assumenda hic porro odio voluptas qui quod sed."
+      "teamDesc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero assumenda hic porro odio voluptas qui quod sed.",
+      "liffId": "2005595080-kRrvbdeB",
+      "apiUrl": "https://localhost:7279/api"
     }
   }
 };

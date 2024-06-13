@@ -84,6 +84,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       const: constants,
+      // liffId: process.env.LIFF_ID,
+      // apiUrl: process.env.API_URL,
     },
   },
 });

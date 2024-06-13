@@ -550,6 +550,10 @@ declare module 'nuxt/schema' {
       meetOurTeam: string,
 
       teamDesc: string,
+
+      liffId: string,
+
+      apiUrl: string,
    },
   }
 }

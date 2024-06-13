@@ -49,7 +49,7 @@ export const useCartStore = defineStore({
   actions: {
     async fetchAllProducts() {
       try {
-        const response = await axios.get('https://localhost:7279/api/Product/getAll');
+        const response = await axios.get(`${useRuntimeConfig().public.const.apiUrl}/Product/getAll`);
         this.allProducts = response.data;
       } catch (error) {
         console.error("Failed to fetch products", error);

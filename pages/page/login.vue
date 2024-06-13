@@ -83,18 +83,11 @@ export default {
     },
     async loginWithLine() {
       try {
-        const { $liffInit, $liff } = useNuxtApp();
-        await $liffInit();
-        console.log("liff", $liff); // 確保這裡打印的不是 undefined
+        const { $liff } = useNuxtApp();
+
+        console.log("liff", $liff); // 確保這裡不是 undefined
         if (!$liff.isLoggedIn()) {
           $liff.login();
-        } else {
-          const profile = await $liff.getProfile();
-          console.log("profile", profile);
-          if (profile) {
-            useUserDashboardStore().setUser({ email: profile.email, isLoggedIn: true });
-            this.$router.back();
-          }
         }
       } catch (error) {
         console.error('Login with LINE failed', error);

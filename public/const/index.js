@@ -292,4 +292,6 @@ export const constants = {
     expedita!`,
   meetOurTeam: "Meet Our Team",
   teamDesc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero assumenda hic porro odio voluptas qui quod sed.",
+  liffId: "2005595080-kRrvbdeB",
+  apiUrl: "https://localhost:7279/api",
 };

@@ -89,7 +89,7 @@ function payWithTransfer() {
       };
 
       // 將相關資訊送至後端
-      axios.post('https://localhost:7279/api/Payment/createOrder', orderData)
+      axios.post(`${useRuntimeConfig().public.const.apiUrl}/Payment/createOrder`, orderData)
         .then(response => {
           // 導轉至訂單成功頁面
           useRouter().push("/page/order_success");
