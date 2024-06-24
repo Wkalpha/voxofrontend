@@ -8,7 +8,7 @@
     <footer1>
       <footerRight />
     </footer1>
-    <mobileMenu />
+    <!-- <mobileMenu /> -->
   </div>
 </template>
 
@@ -18,7 +18,7 @@ import breadcrumb1 from "~/layout/elements/breadcrumbs/breadcrumb1.vue";
 import subscribe from "~/layout/elements/banners/subscribe.vue";
 import footer1 from "~/layout/common/footers/footer1.vue";
 import footerRight from "~/layout/elements/footerElements/footerRight1.vue";
-import mobileMenu from "~/layout/elements/navigation/mobileMenu.vue";
+// import mobileMenu from "~/layout/elements/navigation/mobileMenu.vue";
 export default {
   components: {
     header1,
@@ -26,7 +26,7 @@ export default {
     subscribe,
     footer1,
     footerRight,
-    mobileMenu,
+    // mobileMenu,
   },
   props: {
     pageName: {

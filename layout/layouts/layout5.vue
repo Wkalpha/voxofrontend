@@ -23,7 +23,7 @@ export default {
     breadcrumb1,
     footer1,
     footerRight,
-    mobileMenu,
+    // mobileMenu,
   },
   props: {
     pageName: {

@@ -10,7 +10,7 @@
     </footer1>
     <!-- <bottomCart showCartAt="500" :product="product" /> -->
     <recentlyPurchasedProduct />
-    <mobileMenu />
+    <!-- <mobileMenu /> -->
     <sizeChartModal :showModal="showSizeChart" />
   </div>
 </template>
@@ -23,7 +23,7 @@ import footer1 from "~/layout/common/footers/footer1.vue";
 import footerRight from "~/layout/elements/footerElements/footerRight1.vue";
 import bottomCart from "~/layout/common/productsComponents/bottomCart.vue";
 import recentlyPurchasedProduct from "~/layout/common/productsComponents/recentlyPurchasedProduct.vue";
-import mobileMenu from "~/layout/elements/navigation/mobileMenu.vue";
+// import mobileMenu from "~/layout/elements/navigation/mobileMenu.vue";
 import sizeChartModal from "~/layout/common/productsComponents/sizeChartModal.vue";
 import { useClickStore } from "~~/store/clickEvents";
 
@@ -36,7 +36,7 @@ export default {
     footerRight,
     bottomCart,
     recentlyPurchasedProduct,
-    mobileMenu,
+    // mobileMenu,
     sizeChartModal,
   },
   props: {
