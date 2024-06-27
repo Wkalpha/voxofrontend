@@ -76,13 +76,13 @@ export default {
     !useCookie('newsLetterSet').value &&
     useClickStore().toggleNewsLetterModal
     let layoutMode = useCookie("layoutType").value || "light";
-    if (layoutMode === "dark") this.themeCss = "/voxo/css/demo2_dark.css";
-    else this.themeCss = "/voxo/css/demo2.css";
+    if (layoutMode === "dark") this.themeCss = "/css/demo2_dark.css";
+    else this.themeCss = "/css/demo2.css";
   },
   beforeUnmount() {
     document
       .getElementById("bootstrap-link")
-      .setAttribute("href", "/voxo/css/bootstrap.min.css");
+      .setAttribute("href", "/css/bootstrap.min.css");
   },
 };
 </script>

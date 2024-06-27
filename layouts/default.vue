@@ -1,7 +1,7 @@
 <template>
   <div>
     <slot />
-    <theme-settings />
+    <!-- <theme-settings /> -->
     <div class="tap-to-top" :class="showTapToTop ? 'show' : ''">
       <a href="#">
         <i class="fas fa-chevron-up"></i>
@@ -47,7 +47,7 @@ export default {
   data() {
     return {
       showDarkButton: true,
-      themeCss: "/voxo/css/bootstrap.css",
+      themeCss: "/css/bootstrap.css",
     };
   },
   computed: {

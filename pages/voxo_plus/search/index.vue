@@ -73,8 +73,8 @@ export default {
     useLayout().setPrimaryColor({ primaryColor: "#51983c" })
     let layoutMode = 'light'
 
-    if (layoutMode === "dark") this.themeCss = "/voxo/css/demo6_dark.css";
-    else this.themeCss = "/voxo/css/demo6.css";
+    if (layoutMode === "dark") this.themeCss = "/css/demo6_dark.css";
+    else this.themeCss = "/css/demo6.css";
   },
   mounted() {
     !useCookie('newsLetterSet').value &&

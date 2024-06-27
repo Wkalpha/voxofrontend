@@ -83,8 +83,8 @@ export default {
   },
   created() {
     let layoutMode = useCookie("layoutType").value || "light";
-    if (layoutMode === "dark") this.themeCss = "/voxo/css/demo3_dark.css";
-    else this.themeCss = "/voxo/css/demo3.css";
+    if (layoutMode === "dark") this.themeCss = "/css/demo3_dark.css";
+    else this.themeCss = "/css/demo3.css";
   },
 };
 </script>

@@ -86,8 +86,8 @@ export default {
 
     useLayout().setPrimaryColor({ primaryColor: "#e87316" })
     let layoutMode = useCookie("layoutType").value || "light";
-    if (layoutMode === "dark") this.themeCss = "/voxo/css/demo4_dark.css";
-    else this.themeCss = "/voxo/css/demo4.css";
+    if (layoutMode === "dark") this.themeCss = "/css/demo4_dark.css";
+    else this.themeCss = "/css/demo4.css";
   },
   created() {
     this.productsArray();

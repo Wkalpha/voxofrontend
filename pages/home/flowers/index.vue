@@ -86,8 +86,8 @@ export default {
 
         this.productsArray();
         let layoutMode = 'light';
-        if (layoutMode === "dark") this.themeCss = "/voxo/css/demo5_dark.css";
-        else this.themeCss = "/voxo/css/demo5.css";
+        if (layoutMode === "dark") this.themeCss = "/css/demo5_dark.css";
+        else this.themeCss = "/css/demo5.css";
     },
     mounted() {
         !useCookie('newsLetterSet').value && useClickStore().toggleNewsLetterModal

@@ -52,7 +52,7 @@ export default {
   data() {
     return {
       offerCode: "DEF4526",
-      themeCss: "/voxo/css/demo1.css",
+      themeCss: "/css/demo1.css",
     };
   },
 
@@ -82,8 +82,8 @@ export default {
     useLayout().setPrimaryColor({ primaryColor: "#0163d2" })
     let layoutMode = 'light';
 
-    if (layoutMode === "dark") this.themeCss = "/voxo/css/demo1_dark.css";
-    else this.themeCss = "/voxo/css/demo1.css";
+    if (layoutMode === "dark") this.themeCss = "/css/demo1_dark.css";
+    else this.themeCss = "/css/demo1.css";
   },
   mounted() {
     !useCookie('newsLetterSet').value &&
