@@ -26,41 +26,10 @@
           " class="bg-img d-none" alt="" />
         </a>
       </div>
-      <div class="cart-wrap">
-        <ul>
-          <li>
-            <a href="javascript:void(0)" class="addtocart-btn" data-bs-toggle="modal" data-bs-target="#addtocart"
-              @click="toggleCartModal(product)">
-              <vue-feather type="shopping-bag"></vue-feather>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view"
-              @click="toggleQuickViewModal(product.id)">
-              <vue-feather type="eye"></vue-feather>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)" @click.prevent="addTocompareMixin(product)">
-              <vue-feather type="refresh-cw"></vue-feather>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)" @click.prevent="addToWishlist(product)" class="wishlist">
-              <vue-feather type="heart"></vue-feather>
-            </a>
-          </li>
-        </ul>
-      </div>
     </div>
     <div class="product-details">
-      <div class="rating-details">
-        <!-- <span class="font-light grid-content">{{ product.category !='none'?product.category:product.type }}</span> -->
-      </div>
       <div class="main-price">
-        <a href="javascript:void(0)" @click.prevent="
-          $router.push('/product/product_left_sidebar/' + product.id)
-        " class="font-default">
+        <a href="javascript:void(0)" @click.prevent="$router.push('/product/product_no_sidebar/' + product.id)" class="font-default">
           <h5>{{ product.name }}</h5>
         </a>
         <div class="listing-content">

@@ -58,50 +58,45 @@ function order(info) {
 
 function payWithTransfer() {
   console.log(props.cartItems); // 輸出 cartItems
-  let transferAccount = '1234567890'; // 轉帳帳號
-  Swal.fire({
-    title: '銀行轉帳資訊',
-    html: `
-      <p>轉帳金額: ${cartTotal.value}元</p>
-      <p>轉帳帳號: ${transferAccount}</p>
-      <p>確認後將成立訂單</p>
-    `,
-    icon: 'info',
-    showCancelButton: true,
-    confirmButtonText: '確認',
-    cancelButtonText: '取消',
-  }).then((result) => {
-    if (result.isConfirmed) {
-      // 準備要發送的訂單資料
-      const orderData = {
-        UserId: "testJimmy",
-        ShippingCartId: 1,
-        ShippingDate: null, // 如果有具體發貨日期，這裡可以修改
-        ShippingAddress: null, // 如果有具體地址，這裡可以修改
-        Email: "Jimmy@gmail.com",
-        BillingAddress: null, // 如果有具體地址，這裡可以修改
-        OrderStatus: '已建立',
-        PaymentMethod: 'transfer',
-        TotalAmount: cartTotal.value,
-        ShippingCost: null, // 如果有具體運費，這裡可以修改
-        DiscountAmount: null, // 如果有具體折扣金額，這裡可以修改
-        OrderNotes: `轉帳帳號:${transferAccount}`, // 如果有具體訂單備註，這裡可以修改
-      };
 
-      // 將相關資訊送至後端
-      axios.post(`${useRuntimeConfig().public.const.apiUrl}/Payment/createOrder`, orderData)
-        .then(response => {
-          // 導轉至訂單成功頁面
-          useRouter().push("/page/order_success");
-        })
-        .catch(error => {
-          console.error('Error creating order:', error);
-          // 處理錯誤，例如顯示錯誤信息
-          Swal.fire('錯誤', '建立訂單失敗，請稍後再試', 'error');
-        });
-      useRouter().push('/page/order_success');
-    }
-  });
+  const orderData = {
+    UserId: "U2024061300000003",
+    MerchantIdNo: "1234567890",
+    ShippingCartId: 1,
+    ShippingDate: null, // 如果有具體發貨日期，這裡可以修改
+    ShippingAddress: null, // 如果有具體地址，這裡可以修改
+    Email: "Jimmy@gmail.com",
+    BillingAddress: null, // 如果有具體地址，這裡可以修改
+    OrderStatus: '已建立',
+    PaymentMethod: 'transfer',
+    TotalAmount: cartTotal.value,
+    ShippingCost: null, // 如果有具體運費，這裡可以修改
+    DiscountAmount: null, // 如果有具體折扣金額，這裡可以修改
+  };
+
+  // 將相關資訊送至後端
+  axios.post(`${useRuntimeConfig().public.apiUrl}/Payment/createOrder`, orderData)
+    .then(response => {
+      // 第一次 API 請求成功後打第二次 API
+      return axios.get(`${useRuntimeConfig().public.apiUrl}/CreditCardPayOrder/NewPay`, {
+        params: {
+          OrderCode: response.data.orderId
+        },
+        responseType: 'text'
+      });
+    }).then(response => {
+      // 創建新視窗
+      const newWindow = window.open('', '_blank');
+      newWindow.document.write(response.data);
+      newWindow.document.close();
+      // 導轉至訂單成功頁面
+      useRouter().push("/page/order_success");
+    })
+    .catch(error => {
+      console.error('Error creating order:', error);
+      // 處理錯誤，例如顯示錯誤信息
+      Swal.fire('錯誤', '建立訂單失敗，請稍後再試', 'error');
+    });
 }
 
 function isFormValid(value) {

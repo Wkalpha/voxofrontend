@@ -2,12 +2,19 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
+    
+    "dev": "cross-env NUXT_ENV=dev nuxt dev",
+    "dev:qa": "cross-env NUXT_ENV=qa nuxt dev",
+    
+    "generate": "cross-env nuxt generate",
+    "generate:dev": "cross-env NUXT_ENV=dev nuxt generate",
+    "generate:qa": "cross-env NUXT_ENV=qa nuxt generate",
+
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "nuxt": "^3.9.0"
   },
   "dependencies": {

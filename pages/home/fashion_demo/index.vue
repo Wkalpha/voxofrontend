@@ -29,7 +29,7 @@ export default {
   methods: {
     async fetchProducts() {
       try {
-        const response = await axios.get(`${useRuntimeConfig().public.const.apiUrl}/Product/getAllCategory`);
+        const response = await axios.get(`${useRuntimeConfig().public.apiUrl}/Product/getAllCategory`);
         if (Array.isArray(response.data)) {
           this.categories = response.data; // 假設返回的是產品數組
         } else {

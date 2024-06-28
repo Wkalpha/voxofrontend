@@ -4,7 +4,7 @@
   </Head>
   <layout5 pageName="Shop Fashion" parent="Shop Listing">
     <shopSection pageName="Shop Listing" :category="category" />
-    <ShopShopCanvasFilterOffCanvasSection />
+    <!-- <ShopShopCanvasFilterOffCanvasSection /> -->
   </layout5>
 </template>
 

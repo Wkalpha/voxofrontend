@@ -8,7 +8,7 @@
       <footerRight1 :formControlColor="formControlColor" />
     </footer1>
     <slot name="cookieBar"></slot>
-    <!-- <mobileMenu /> -->
+    <mobileMenu />
   </div>
 </template>
 
@@ -16,13 +16,13 @@
 import header1 from "~/layout/common/headers/header1.vue";
 import footer1 from "~/layout/common/footers/footer1.vue";
 import footerRight1 from "~/layout/elements/footerElements/footerRight1.vue";
-// import mobileMenu from "~/layout/elements/navigation/mobileMenu.vue";
+import mobileMenu from "~/layout/elements/navigation/mobileMenu.vue";
 export default {
   props: ["iconBgColor", "formControlColor"],
   components: {
     header1,
     footer1, footerRight1
-    // , mobileMenu
+    , mobileMenu
   },
 };
 </script>

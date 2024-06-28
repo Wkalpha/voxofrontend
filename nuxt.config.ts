@@ -84,6 +84,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       const: constants,
+      liffId:process.env.NUXT_ENV === 'qa' ? "2005595080-kRrvbdeB" : "2005595080-kRrvbdeB",
+      apiUrl: process.env.NUXT_ENV === 'qa' ? 'https://qa-cloudymall-ec.azurewebsites.net/api' : 'https://localhost:7279/api' // 預設為開發環境
     },
   },
 });

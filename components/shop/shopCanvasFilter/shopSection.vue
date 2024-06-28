@@ -155,7 +155,7 @@ export default {
     },
     async fetchProducts() {
       try {
-        const response = await axios.get(`${useRuntimeConfig().public.const.apiUrl}/product/getAll`); // 根據實際情況調整URL
+        const response = await axios.get(`${useRuntimeConfig().public.apiUrl}/product/getAll`); // 根據實際情況調整URL
         if (Array.isArray(response.data)) {
           this.cards = response.data;
         } else {

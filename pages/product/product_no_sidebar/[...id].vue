@@ -29,7 +29,7 @@ export default {
     const fetchProduct = async () => {
       try {
         const productId = route.params.id || 1;
-        const response = await axios.get(`${useRuntimeConfig().public.const.apiUrl}/Product/getById?id=${productId}`);
+        const response = await axios.get(`${useRuntimeConfig().public.apiUrl}/Product/getById?id=${productId}`);
         product.value = response.data;
       } catch (error) {
         console.error('Error fetching product:', error);

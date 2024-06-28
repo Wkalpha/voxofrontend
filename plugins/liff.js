@@ -16,7 +16,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 
       // 使用 axios 發送請求到後端
       try {
-        const response = await axios.post(`${useRuntimeConfig().public.const.apiUrl}/User/findUser`, {
+        const response = await axios.post(`${useRuntimeConfig().public.apiUrl}/User/findUser`, {
           email: idToken.email
         });
 
@@ -25,7 +25,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
           useUserDashboardStore().setUser({email:response.data.email,isLoggedIn:true})
         } else {
           console.log('User does not exist');
-          const response = await axios.post(`${useRuntimeConfig().public.const.apiUrl}/User/lineCreate`, {
+          const response = await axios.post(`${useRuntimeConfig().public.apiUrl}/User/lineCreate`, {
               oauthProvider : 'line',
               oauthId : profile.userId,
               email : idToken.email,
