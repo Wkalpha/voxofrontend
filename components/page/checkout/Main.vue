@@ -24,6 +24,7 @@ import { storeToRefs } from "pinia";
 import { useCartStore } from "~~/store/cart";
 import Swal from "sweetalert2";
 import axios from 'axios';
+import { useUserDashboardStore } from "~~/store/userDashboard";
 
 let props = defineProps({
   cartItems: Array
@@ -49,50 +50,37 @@ function order(info) {
   }
   if (isLogin.value) {
     // payWithStripe();
-    payWithTransfer();
+    payWithCreditCard();
   } else {
     useRouter().push("/page/login");
   }
 
 }
 
-function payWithTransfer() {
-  console.log(props.cartItems); // 輸出 cartItems
-
+function payWithCreditCard() {
   const orderData = {
-    UserId: "U2024061300000003",
-    MerchantIdNo: "1234567890",
-    ShippingCartId: 1,
-    ShippingDate: null, // 如果有具體發貨日期，這裡可以修改
-    ShippingAddress: null, // 如果有具體地址，這裡可以修改
-    Email: "Jimmy@gmail.com",
-    BillingAddress: null, // 如果有具體地址，這裡可以修改
+    MerchantIdNo: useUserDashboardStore().user.merchantIdNo,
+    Email: useUserDashboardStore().user.email,
     OrderStatus: '已建立',
-    PaymentMethod: 'transfer',
+    PaymentMethod: 'creditCard',
     TotalAmount: cartTotal.value,
-    ShippingCost: null, // 如果有具體運費，這裡可以修改
-    DiscountAmount: null, // 如果有具體折扣金額，這裡可以修改
   };
 
   // 將相關資訊送至後端
   axios.post(`${useRuntimeConfig().public.apiUrl}/Payment/createOrder`, orderData)
     .then(response => {
       // 第一次 API 請求成功後打第二次 API
-      return axios.get(`${useRuntimeConfig().public.apiUrl}/CreditCardPayOrder/NewPay`, {
-        params: {
-          OrderCode: response.data.orderId
-        },
-        responseType: 'text'
-      });
-    }).then(response => {
-      // 創建新視窗
-      const newWindow = window.open('', '_blank');
-      newWindow.document.write(response.data);
-      newWindow.document.close();
-      // 導轉至訂單成功頁面
-      useRouter().push("/page/order_success");
-    })
-    .catch(error => {
+      // return axios.get(`${useRuntimeConfig().public.apiUrl}/CreditCardPayOrder/NewPay`, {
+      //   params: {
+      //     OrderCode: response.data.orderId
+      //   },
+      //   responseType: 'text'
+      // });
+      // 構建第二次 API 請求的 URL
+      const redirectUrl = `${useRuntimeConfig().public.apiUrl}/CreditCardPayOrder/NewPay?OrderCode=${response.data.orderId}`;
+      // 直接跳轉到第二次 API 的 URL
+      window.location.href = redirectUrl;
+    }).catch(error => {
       console.error('Error creating order:', error);
       // 處理錯誤，例如顯示錯誤信息
       Swal.fire('錯誤', '建立訂單失敗，請稍後再試', 'error');

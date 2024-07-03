@@ -88,6 +88,8 @@ export default {
         console.log("liff", $liff); // 確保這裡不是 undefined
         if (!$liff.isLoggedIn()) {
           $liff.login();
+        }else{
+          console.log("isLoggedIn");
         }
       } catch (error) {
         console.error('Login with LINE failed', error);

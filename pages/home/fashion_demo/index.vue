@@ -13,6 +13,8 @@ import layout1 from "~/layout/layouts/layout1.vue";
 import { useLayout } from "~~/store/layout";
 import { useClickStore } from "~~/store/clickEvents";
 import axios from 'axios';
+import { useRoute } from 'vue-router';
+import { useUserDashboardStore } from "~~/store/userDashboard";
 
 export default {
   components: {
@@ -28,10 +30,15 @@ export default {
   },
   methods: {
     async fetchProducts() {
+      const route = useRoute();
+      const merchantIdNo = route.query.merchantIdNo;
+      useUserDashboardStore().setUser({merchantIdNo:merchantIdNo})
       try {
-        const response = await axios.get(`${useRuntimeConfig().public.apiUrl}/Product/getAllCategory`);
+        const response = await axios.get(`${useRuntimeConfig().public.apiUrl}/Product/getAllCategory`,{
+          params: { merchantIdNo: useUserDashboardStore().user.merchantIdNo }
+        });
         if (Array.isArray(response.data)) {
-          this.categories = response.data; // 假設返回的是產品數組
+          this.categories = response.data;
         } else {
           console.error('Unexpected response format:', response.data);
         }

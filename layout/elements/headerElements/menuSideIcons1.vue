@@ -146,6 +146,8 @@ import { useCartStore } from "~~/store/cart";
 import { useLayout } from '~~/store/layout';
 import { useProductStore } from '~~/store/products'
 import { useUserDashboardStore } from "~~/store/userDashboard";
+import { useNuxtApp } from "#app";
+
 export default {
   components: {
     VueFeather,
@@ -186,6 +188,11 @@ export default {
     },
     logoutUser() {
       useUserDashboardStore().logoutUser();
+      const { $liff } = useNuxtApp();
+
+      if ($liff.isLoggedIn()) {
+        $liff.logout();
+      }
       this.$router.push('/page/login')
     },
     openSearchBar() {

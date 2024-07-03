@@ -1,5 +1,6 @@
 import { useLayout } from "./layout";
 import axios from "axios";
+import { useUserDashboardStore } from "~~/store/userDashboard";
 
 export const useCartStore = defineStore({
   id: "cart",
@@ -49,7 +50,9 @@ export const useCartStore = defineStore({
   actions: {
     async fetchAllProducts() {
       try {
-        const response = await axios.get(`${useRuntimeConfig().public.apiUrl}/Product/getAll`);
+        const response = await axios.get(`${useRuntimeConfig().public.apiUrl}/Product/getAll`,{
+          params: { merchantIdNo: useUserDashboardStore().user.merchantIdNo }
+        });
         this.allProducts = response.data;
       } catch (error) {
         console.error("Failed to fetch products", error);

@@ -78,6 +78,7 @@ import options from '~/layout/elements/shopSections/options1.vue';
 import { mapState } from 'pinia';
 import { useClickStore } from '~~/store/clickEvents';
 import { usefilterStore } from '~~/store/filters';
+import { useUserDashboardStore } from "~~/store/userDashboard";
 
 export default {
   components: { VueFeather, productBox1, options },
@@ -155,7 +156,9 @@ export default {
     },
     async fetchProducts() {
       try {
-        const response = await axios.get(`${useRuntimeConfig().public.apiUrl}/product/getAll`); // 根據實際情況調整URL
+        const response = await axios.get(`${useRuntimeConfig().public.apiUrl}/product/getAll`,{
+          params: { merchantIdNo: useUserDashboardStore().user.merchantIdNo }
+        }); // 根據實際情況調整URL
         if (Array.isArray(response.data)) {
           this.cards = response.data;
         } else {
