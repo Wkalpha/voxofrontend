@@ -1,12 +1,6 @@
 <template>
   <div class="menu-right">
     <ul>
-      <li>
-        <div class="search-box d-flex" :class="iconBgColor" :style="{ color: iconBgColor ? 'white' : 'black' }"
-          @click="openSearchBar">
-          <vue-feather type="search"></vue-feather>
-        </div>
-      </li>
       <li class="onhover-dropdown">
         <div class="cart-media">
           <vue-feather type="user"></vue-feather>
@@ -18,47 +12,17 @@
               Welcome {{user.email}}
             </li>
             <li >
-              <span @click.prevent="logoutUser"> Logout</span>
+              <Nuxt-link to="/page/userOrder"> 訂單</Nuxt-link>
+            </li>
+            <li >
+              <span @click.prevent="logoutUser"> 登出</span>
             </li>
           </ul>
           <ul v-else>
-            
             <li >
-              Welcome {{user.email}}
-            </li>
-            <li >
-              <Nuxt-link to="/page/login"> Login</Nuxt-link>
+              <Nuxt-link to="/page/login"> 登入</Nuxt-link>
             </li>
           </ul>
-        </div>
-      </li>
-      <li class="onhover-dropdown wislist-dropdown">
-        <div class="cart-media">
-          <a href="javascript:void(0)" class="d-flex" @click.prevent="$router.push('/page/wishlist')">
-            <vue-feather type="heart"></vue-feather>
-            <span class="label label-theme rounded-pill">{{
-              wishlist.length
-            }}</span>
-          </a>
-        </div>
-        <div class="onhover-div">
-          <a @click.prevent="$router.push('/page/wishlist')">
-            <div class="wishlist-empty">
-              <i class="fab fa-gratipay"></i>
-              <h6 class="mb-1" v-if="wishlist.length === 0">
-                Your wislist empty !!
-              </h6>
-              <p class="font-light mb-0" v-if="wishlist.length === 0">
-                explore more and shortlist items.
-              </p>
-              <h6 v-if="wishlist.length != 0">
-                Your Wishlist has {{ wishlist.length }} items.
-              </h6>
-              <nuxt-link to="/page/wishlist" class="font-light mb-0" v-if="wishlist.length != 0">
-                View Wishlist
-              </nuxt-link>
-            </div>
-          </a>
         </div>
       </li>
       <li class="onhover-dropdown cart-dropdown" :class="isCartOpen ? 'show' : ''">
